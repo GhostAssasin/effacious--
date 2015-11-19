@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator v1 15.11.25</title>
+	<link rel="stylesheet" type="text/css" href="calc_style.css">
+</head>
+<body>
+<script src = "https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="calc_script.js"></script>
+<div id="main";>
+<div id="headCalc"><p id="calcparag";></p></div>
+<div id="result"><p id="result_text";></p></div>
+<div id="klava">
+	<div class="line">
+		<div id="rad_deg" onclick="turn()">
+			<div id="rad_ection"><img src="images/Deg.png"></div>
+			<div id="deg_ection"><img src="images/reg.png"></div>	
+			<img id="imgg" src="images/button.png">
+		</div>
+		<div id="4" class="ection" ><img src="images/x!.png"></div>	
+		<div id="0" class="ection" onclick="keyboard('(')"><img src="images/(.png"></div>	
+		<div id="1" class="ection" onclick="keyboard(')')"><img src="images/).png"></div>	
+		<div id="2" class="ection"><img src="images/%.png"></div>	
+		<div id="3" class="ection" onclick="ac()"><img id="acce" src="images/CE.png"></div>	
+	</div> 
+
+	<div class="line">
+		<div id="Inv" class="ection" onclick="Invercion()"><img id="Invimg" src="images/lnv1.png"></div>	
+		<div id="5" class="ection" onclick="keyboard('sin(')"><img id="sinimg" src="images/sin.png"></div>	
+		<div id="6" class="ection" onclick="keyboard('ln(')"><img id="lnimg" src="images/ln.png"></div>
+		<div id="7" class="number" onclick="keyboard('7')"><img src="images/7.png"></div>
+		<div id="8" class="number" onclick="keyboard('8')"><img src="images/8.png"></div>
+		<div id="9" class="number" onclick="keyboard('9')"><img src="images/9.png"></div>
+		<div id="10" class="ection" onclick="keyboard('/')"><img src="images/dil.png"></div>		
+	</div>
+
+	<div class="line";>
+		<div id="11" class="ection"  onclick="keyboard('3.1415')"><img src="images/pi.png"></div>	
+		<div id="12" class="ection" onclick="keyboard('cos(')"><img id="cosimg"; src="images/cos.png"></div>	
+		<div id="13" class="ection" onclick="keyboard('log(')"><img id="logimg"; src="images/log.png"></div>
+		<div id="14" class="number" onclick="keyboard('4')"><img src="images/4.png"></div>
+		<div id="15" class="number" onclick="keyboard('5')"><img src="images/5.png"></div>
+		<div id="16" class="number" onclick="keyboard('6')"><img src="images/6.png"></div>
+		<div id="17" class="ection" onclick="keyboard('*')"><img src="images/*.png"></div>		
+	</div>
+
+	<div class="line";>
+		<div id="18" class="ection" onclick="keyboard('2.7182')"><img src="images/e.png"></div>	
+		<div id="19" class="ection" onclick="keyboard('tan(')"><img id="tanimg" src="images/tan.png"></div>	
+		<div id="20" class="ection" onclick="keyboard('sqrt(')"><img id="sqrtimg" src="images/sqrt.png"></div>
+		<div id="21" class="number" onclick="keyboard('1')"><img src="images/1.png">1</div>
+		<div id="22" class="number" onclick="keyboard('2')"><img src="images/2.png"></div>
+		<div id="23" class="number" onclick="keyboard('3')"><img src="images/3.png"></div>
+		<div id="24" class="ection" onclick="keyboard('-')"><img src="images/min.png"></div>		
+	</div>
+
+	<div class="line">
+		<div id="Ans" class="ection" onclick="keyboard('Ans')"><img id="ansimg"; src="images/ans.png"></div>	
+		<div id="25" class="ection"><img src="images/exp.png"></div>	
+		<div id="26" class="ection" onclick="keyboard('^')"><img id="powimg"; src="images/pow.png"></div>
+		<div id="27" class="number" onclick="keyboard('0')"><img src="images/0.png"></div>
+		<div id="28" class="number" onclick="keyboard('.')"><img src="images/kr.png"></div>
+		<div id="equal" onclick="equall()"><img src="images/=.png"></div>
+		<div id="29" class="ection" onclick="keyboard('+')"><img src="images/+.png"></div>		
+	</div>
+</div>
+</div>
+</body>
+</html>
