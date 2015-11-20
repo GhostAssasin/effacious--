@@ -3,23 +3,26 @@ var Inv=true;
 var e=2.7182818446;
 var ac_ce=0;
 var result=[];
-result[0]=' ';
-result[1]='0';
+result.push('0');
 var headCalc;
 var Ans;
 var use_eqal=false;
-var i_key=1;
 var use_zan=true;
 var openI=0;
 var closeI=0;
 var rezultOb;
 var mainArray=[];
 var po=false;
+var promsumbol='';
+
+
 
 
 $(document).ready(function(){
-        $("#result_text").html(result[i_key]);
+        $("#result_text").html(result[result.length-1]);
 });
+
+//--------------------------------------------------------------------------------
 
 function turn()
 {	if(degree==="Deg"){
@@ -32,6 +35,7 @@ function turn()
 	}
 }
 
+//------------------------------------------------------------------------------
 
 function Invercion()
 {
@@ -62,9 +66,8 @@ function Invercion()
 	}
 }
 
-
+//-------------------------------------------------------------------------
 function keyboard(key) {
-		use_zan=true;
 		if(Inv==false){
 			switch(key){
 				case 'sin(': key="arsin("; break;
@@ -77,76 +80,66 @@ function keyboard(key) {
 			};
 		}
 		if(key=='Ans'){key=String(Ans);}
-		console.log(i_key);
-        if(i_key===1){
-			result[1]=key;
-            result[2]=key;
-            i_key++;
-		}
-		else
+        if (result.length==1){result.push(key);}
+        else
         {
-		var i_ke=i_key-1;
-		var pr=result[i_ke]+key;
-		result[i_key]=String(pr);
-        
-    }
+            result.push(String(result[result.length-1])+key);
+        }
 
 	$(document).ready(function(){
-        $("#result_text").html(result[i_key]);});
-	i_key++;
+        $("#result_text").html(result[result.length-1]);});
 }
 
-
+//--------------------------------------------------------------------------
 
 function ac(){
-	if(use_zan){i_key--; use_zan=false;}
 	
 	if (use_eqal)
     {
         Ans=rezultOb; 
 		use_eqal=false; 
+        result.splice(1,result.length);
 		document.getElementById('acce').src='images/CE.png';
-		$(document).ready(function(){
-        $("#result_text").html("0");});
-        result.splice(2,result.length);
-        result[1]="0";
-        i_key=1;
-        $(document).ready(function(){
-        $("#headCalc").html("Ans="+Ans);});
+		      $(document).ready(function(){
+                $("#result_text").html(result[0]);});
+           
+            $(document).ready(function(){
+                $("#headCalc").html("Ans="+Ans);});
         
 	}
 	else{
-    result.splice(i_key,2);i_key--;
+    result.splice((result.length-1),1);
 	$(document).ready(function(){
-        $("#result_text").html(result[i_key]);});
+        $("#result_text").html(result[result.length-1]);});
   }
 }
 
+//--------------------------------------------------------------------------------------
+
 function equall(){
     var promRezut;
-    var mainString=result[i_key-1];
+    var mainString=result[result.length-1];
     mainString=zamina(mainString);
     transformToArr(mainString);
+
     //console.log(mainString);
     //console.log(subArray(2,5));
-//for (var i20=0;i20<mainArray.length;i20++){console.log(mainArray[i20]);}
+for (var i20=0;i20<mainArray.length;i20++){console.log('mainArray['+i20+']='+mainArray[i20]);}
 
   if(aut(mainString)){
     use_eqal=true;
     //console.log(isBracker(mainString));
   if (isBracker(mainString)==0) 
     {
-        
         rezultOb=eazu_action(mainString);
-        
-}
+    }
     else
     {
         for(var i17=0;i17<mainArray.length;i17++)
         {
             if (isBracker(mainString)==0)
             {
-                rezultOb=eazu_action(subArray(-1,mainArray.length));//??????
+                rezultOb=eazu_action(subArray(-1,mainArray.length));
                 mainArray.splice(1,mainArray.length)
             }
             else
@@ -248,7 +241,8 @@ function equall(){
     document.getElementById('acce').src='images/AC.png';
     $(document).ready(function(){
         $("#result_text").html(rezultOb);});
-        headCalc=result[i_key-1]+'=';
+        
+        headCalc=result[result.length-1]+'=';
         $(document).ready(function(){
         $("#calcparag").html(headCalc);});
 }
@@ -262,8 +256,7 @@ else
     mainArray.splice(0,mainArray.length);
 }
 
-
-
+//------------------------------------------------------------
 
 function lastBracker(){
   for (var i1=0;i1<mainArray.length; i1++) {
@@ -275,6 +268,8 @@ function lastBracker(){
   };
 }
 
+//--------------------------------------------------------------
+
 function isBracker (strinn) {
    // console.log(strinn);
     var ls=0;
@@ -285,7 +280,7 @@ function isBracker (strinn) {
 return ls;
 }
 
-
+//----------------------------------------------------------------------
 
 function eazu_action (subStrIn) {
 	var znaku=[];
@@ -357,6 +352,7 @@ function eazu_action (subStrIn) {
 return znaku[0];	
 }
 
+//-------------------------------------------------------------------------------------
 
 function subArray (openIndex,closeIndex) {
     var returnString="";
@@ -368,122 +364,76 @@ function subArray (openIndex,closeIndex) {
     return returnString;
 }
 
+//---------------------------------------------------------------------------
 
 function transformToArr(mainString1) {
-    var i9=0;
-    var prom1="";
-    l=true;
-    while(i9<mainString1.length)
+mainArray=mainArray.splice(0,mainArray.length);
+
+
+ while(mainString1.length!=0)
     {
-     
-     if(i9==0)
-{
-        if(mainString1[i9]=='(' || mainString1[i9]==')')
-     {
-        mainArray.push(mainString1[0]);
-        i9++;
-        
-     }
- 
-     else {prom1+=mainString1[i9]; i9++;}
- }
-      
+        mainString1=cheknumber('0',mainString1);
+        mainString1=cheknumber('1',mainString1);
+        mainString1=cheknumber('2',mainString1);
+        mainString1=cheknumber('3',mainString1);
+        mainString1=cheknumber('4',mainString1);
+        mainString1=cheknumber('5',mainString1);
+        mainString1=cheknumber('6',mainString1);
+        mainString1=cheknumber('7',mainString1);
+        mainString1=cheknumber('8',mainString1);
+        mainString1=cheknumber('9',mainString1);
+        mainString1=cheknumber('.',mainString1);
 
-        if(mainString1[i9]=="^" || mainString1[i9]=="*" || mainString1[i9]=="/" || mainString1[i9]=="+" || mainString1[i9]=="-"  || mainString1[i9]=="(" || mainString1[i9]==")")
-     {
-        mainArray.push(prom1);
-        mainArray.push(mainString1[i9]);i9++;
-        prom1=''; 
-         if(mainString1[i9]=='(')
-        {   if(prom1!=''){mainArray.push(prom1);prom1='';i9++;}
-            do{
+        mainString1=cheksumbol('(',mainString1);
+        mainString1=cheksumbol(')',mainString1);
+        mainString1=cheksumbol('a',mainString1);
+        mainString1=cheksumbol('b',mainString1);
+        mainString1=cheksumbol('c',mainString1);
+        mainString1=cheksumbol('d',mainString1);
+        mainString1=cheksumbol('e',mainString1);
+        mainString1=cheksumbol('f',mainString1);
+        mainString1=cheksumbol('g',mainString1);
+        mainString1=cheksumbol('h',mainString1);
+        mainString1=cheksumbol('i',mainString1);
+        mainString1=cheksumbol('l',mainString1);
+        mainString1=cheksumbol('^',mainString1);
+        mainString1=cheksumbol('*',mainString1);
+        mainString1=cheksumbol('/',mainString1);
+        mainString1=cheksumbol('+',mainString1);
+        mainString1=cheksumbol('-',mainString1);
 
-                mainArray.push(mainString1[i9]);i9++;                
-            }while(mainString1[i9]=='(');
-        }
+        if(mainString1.length==0 && promsumbol!=''){mainArray.push(promsumbol);} 
 
-        if(mainString1[i9]==')')
-        {   if(prom1!=''){mainArray.push(prom1);prom1='';}
-            do{
-                mainArray.push(mainString1[i9]);i9++;                
-            }while(mainString1[i9]==')');
-        }    
-         
-     } 
-
-     
-         if(mainString1[i9+1]!='^' || mainString1[i9+1]!='*' || mainString1[i9+1]!='/' || mainString1[i9+1]!='-' || mainString1[i9+1]!='+' || mainString1[i9+1]!='(' || mainString1[i9+1]!=')')
-        {
-            prom1+=mainString1[i9];
-            mainArray.push(prom1);
-            prom1='';
-            i9++;
-            if(mainString1[i9]=='^'){mainArray.push(prom1);prom1=''; mainArray.push(mainString1[i9]);i9++;}
-            if(mainString1[i9]=='/'){mainArray.push(prom1);prom1=''; mainArray.push(mainString1[i9]);i9++;}
-            if(mainString1[i9]=='*'){mainArray.push(prom1);prom1=''; mainArray.push(mainString1[i9]);i9++;}
-            if(mainString1[i9]=='+'){mainArray.push(prom1);prom1=''; mainArray.push(mainString1[i9]);i9++;}
-            if(mainString1[i9]=='-'){mainArray.push(prom1);prom1=''; mainArray.push(mainString1[i9]);i9++;}
-            
-            if(mainString1[i9]=='(')
-        {   if(prom1!=''){mainArray.push(prom1);prom1='';i9++;}
-            do{
-
-                mainArray.push(mainString1[i9]);i9++;                
-            }while(mainString1[i9]=='(');
-        }
-
-        if(mainString1[i9]==')')
-        {   if(prom1!=''){mainArray.push(prom1);prom1='';}
-            do{
-                mainArray.push(mainString1[i9]);i9++;                
-            }while(mainString1[i9]==')');
-        }
-          //  console.log(prom1);
-        }
-
-
-     if(mainString1[i9+1]=="^" || mainString1[i9+1]=="*" || mainString1[i9+1]=="/" || mainString1[i9+1]=="+" || mainString1[i9+1]=="-"  || mainString1[i9+1]=="(" || mainString1[i9+1]==")")
-            {
-                prom1+=mainString1[i9];
-                //console.log(prom1);
-                mainArray.push(prom1);
-                i9++;
-                prom1='';
-                //console.log('k');
-                mainArray.push(mainString1[i9]);
-                 //console.log(mainArray[1]);
-                i9++;
-
-            if(mainString1[i9]=='(')
-        {   if(prom1!=''){mainArray.push(prom1);prom1='';i9++;}
-            do{
-
-                mainArray.push(mainString1[i9]);i9++;                
-            }while(mainString1[i9]=='(');
-        }
-
-        if(mainString1[i9]==')')
-        {   if(prom1!=''){mainArray.push(prom1);prom1='';}
-            do{
-                mainArray.push(mainString1[i9]);i9++;                
-            }while(mainString1[i9]==')');
-        }
-            } 
-        if(i9==mainString1.length-1)
-        {
-            prom1+=mainString1[i9];
-            mainArray.push(prom1);
-            i9++;
-           // console.log(prom1);
-        }
-
-    }
-    for(var i18=0;i18<mainArray.length;i18++)
-    {
-        if(mainArray[i18]===''){mainArray.splice(i18,1);}
-
-    }
+    };
 }
+
+//---------------------------------------------------------------------------------------
+
+function cheksumbol (sumbol,chekedString) {
+    if(chekedString[0]==sumbol)
+        {
+            if(promsumbol!=''){mainArray.push(promsumbol); promsumbol='';}
+            mainArray.push(chekedString[0]);
+            chekedString=chekedString.slice(1);
+            //console.log(chekedString);    
+        }
+        return chekedString;
+        
+}
+
+//---------------------------------------------------------------------------
+
+function cheknumber(number,chStringNum) {
+   
+    if(chStringNum[0]==number)
+        {
+            promsumbol+=number;
+            chStringNum=chStringNum.slice(1);    
+        }
+        return chStringNum;
+}
+
+//---------------------------------------------------------------------------
 
 function zamina (str1) {
     str1=str1.replace(/arsin/g,'a');
@@ -498,6 +448,7 @@ function zamina (str1) {
     return str1;
 }
 
+//------------------------------------------------------------------------
 
 function aut (srtin) {
 	var colclose=0;
@@ -514,16 +465,8 @@ function aut (srtin) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
+//------------------------------------
+//------------------------------------
 
 $(document).ready(function() {
     $('#equal').mouseenter(function(){
